@@ -71,7 +71,7 @@ fi
 print_banner
 
 # Main installation process
-total_steps=25
+total_steps=28
 current_step=0
 
 echo -e "\n${MAGENTA}${BOLD}Starting GenieACS Installation Process${NC}\n"
@@ -171,6 +171,7 @@ for service in mongod genieacs-cwmp genieacs-nbi genieacs-fs genieacs-ui; do
 done
 
 echo -e "\n${GREEN}${BOLD}Script execution completed successfully!${NC}"
+
 
 
 
