@@ -50,8 +50,8 @@ print_banner() {
 	echo "  \____/_/   \_\____|____/   |____/ \___|_|  |_| .__/ \__|"
 	echo "                                               |_|        "
 	echo ""
-	echo "                  --- Ubuntu 22.04 ---"
-	echo "                  --- By Mostech ---"
+	echo "                  --- Armbian-Jammy ---"
+	echo "                    --- By Mostech ---"
 	echo -e "${NC}"
 }
 
@@ -173,6 +173,7 @@ for service in mongod genieacs-cwmp genieacs-nbi genieacs-fs genieacs-ui; do
 done
 
 echo -e "\n${GREEN}${BOLD}Script execution completed successfully!${NC}"
+
 
 
 
