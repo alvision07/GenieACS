@@ -71,7 +71,7 @@ fi
 print_banner
 
 # Main installation process
-total_steps=28
+total_steps=29
 current_step=0
 
 echo -e "\n${MAGENTA}${BOLD}Starting GenieACS Installation Process${NC}\n"
@@ -84,21 +84,23 @@ run_command "apt install -y nodejs" "Installing NodeJS ($(( ++current_step ))/$t
 
 run_command "apt install -y npm" "Installing NPM ($(( ++current_step ))/$total_steps)"
 
-run_command "wget http://ports.ubuntu.com/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_arm64.deb && dpkg -i libssl1.1_1.1.1f-1ubuntu2_arm64.deb" "Installing libssl ($(( ++current_step ))/$total_steps)"
+run_command "wget https://ports.ubuntu.com/pool/main/o/openssl/libssl1.1_1.1.0g-2ubuntu4_arm64.deb && dpkg -i libssl1.1_1.1.0g-2ubuntu4_arm64.deb" "Installing libssl ($(( ++current_step ))/$total_steps)"
 
 run_command "curl -fsSL https://www.mongodb.org/static/pgp/server-4.4.asc | apt-key add -" "Adding MongoDB key ($(( ++current_step ))/$total_steps)"
 
-run_command "echo 'deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/4.4 multiverse' | tee /etc/apt/sources.list.d/mongodb-org-4.4.list" "Adding MongoDB repository ($(( ++current_step ))/$total_steps)"
+run_command "echo 'deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse' | tee /etc/apt/sources.list.d/mongodb-org-4.4.list" "Adding MongoDB repository ($(( ++current_step ))/$total_steps)"
 
 run_command "apt-get update -y" "Updating package list ($(( ++current_step ))/$total_steps)"
 
-run_command "apt-get install mongodb-org -y" "Installing MongoDB ($(( ++current_step ))/$total_steps)"
+run_command "apt-get install mongodb-org=4.4.8 -y" "Installing MongoDB ($(( ++current_step ))/$total_steps)"
 
 run_command "apt-get upgrade -y" "Upgrading system ($(( ++current_step ))/$total_steps)"
 
 run_command "systemctl start mongod" "Starting MongoDB service ($(( ++current_step ))/$total_steps)"
 
 run_command "systemctl enable mongod" "Enabling MongoDB service ($(( ++current_step ))/$total_steps)"
+
+run_command "apt-mark hold mongodb-org mongodb-org-server mongodb-org-shell mongodb-org-mongos mongodb-org-tools"  "Hold MongoDB Version ($(( ++current_step ))/$total_steps)"
 
 run_command "npm install -g genieacs@1.2.13" "Installing GenieACS ($(( ++current_step ))/$total_steps)"
 
@@ -171,6 +173,7 @@ for service in mongod genieacs-cwmp genieacs-nbi genieacs-fs genieacs-ui; do
 done
 
 echo -e "\n${GREEN}${BOLD}Script execution completed successfully!${NC}"
+
 
 
 
