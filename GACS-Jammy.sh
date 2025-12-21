@@ -100,7 +100,7 @@ run_command "systemctl start mongod" "Starting MongoDB service ($(( ++current_st
 
 run_command "systemctl enable mongod" "Enabling MongoDB service ($(( ++current_step ))/$total_steps)"
 
-run_command "apt-mark hold mongodb-org mongodb-org-server mongodb-org-shell mongodb-org-mongos mongodb-org-tools"  "Hold MongoDB Version ($(( ++current_step ))/$total_steps)"
+run_command "apt-mark hold mongodb-org mongodb-org-server mongodb-org-shell mongodb-org-mongos mongodb-org-tools mongodb-org-database-tools-extra"  "Hold MongoDB Version ($(( ++current_step ))/$total_steps)"
 
 run_command "npm install -g genieacs@1.2.13" "Installing GenieACS ($(( ++current_step ))/$total_steps)"
 
@@ -173,6 +173,7 @@ for service in mongod genieacs-cwmp genieacs-nbi genieacs-fs genieacs-ui; do
 done
 
 echo -e "\n${GREEN}${BOLD}Script execution completed successfully!${NC}"
+
 
 
 
